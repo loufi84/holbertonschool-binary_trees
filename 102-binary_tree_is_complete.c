@@ -72,18 +72,18 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	while (queue)
 	{
 		current = dequeue(&queue);
+		if (flag && (current->left || current->right))
+			return (0);
 		if (current->left == NULL && current->right != NULL)
 			return (0);
-
 		if (current->left)
 			enqueue(&queue, current->left);
+		else
+			flag = 1;
 		if (current->right)
 			enqueue(&queue, current->right);
 		else
 			flag = 1;
-
-		if (flag && (current->left || current->right))
-			return (0);
 	}
 	return (1);
 }
